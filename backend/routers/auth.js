@@ -12,7 +12,7 @@ async function comparePassword(password, targetPassword) {
 function generateAuthToken(user) {
   return jwt.sign(
     { id: user._id, username: user.username },
-    "canthackthissecretitstoolongtocrack",
+    process.env.JWT_SECRET,
     { expiresIn: "100h" },
   );
 }
