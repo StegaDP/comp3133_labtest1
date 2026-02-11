@@ -57,7 +57,17 @@ app.ws("/ws", (ws, req) => {
           date_sent: new Date(),
         });
 
+<<<<<<< HEAD
         await newMessage.save();
+=======
+        await newMessage.save().then(() => {
+          app.getWss().clients.forEach((client) => {
+            client.send(
+              JSON.stringify({ event: "new_message", message: newMessage }),
+            );
+          });
+        });
+>>>>>>> 37da6343c4ce3a75c8938d89a9ffdd3e604482ff
         ws.send(JSON.stringify({ status: "success", message: "Message sent" }));
       }
     } else {
